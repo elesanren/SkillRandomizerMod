@@ -24,7 +24,7 @@ namespace SkillTriggerMod
             { "hasDoubleJump",   "雪绒披风" },
             { "hasChargeSlash",  "蓄力斩" },
             { "hasSuperJump",    "灵丝升腾" },
-            { "hasWallJump",     "蛛攀术" }
+            { "hasWalljump",     "蛛攀术" }
         };
 
         private static readonly List<string> AllFields = DisplayNames.Keys.ToList();
@@ -50,7 +50,7 @@ namespace SkillTriggerMod
             { "hasDoubleJump",      "Hornet_Double_Jump_Prompt" },
             { "hasChargeSlash",     "charge_dash_slash" },
             { "hasSuperJump",       "prompt_super_jump" },
-            { "hasWallJump",        "Wall_Jump_Prompt" }
+            { "hasWalljump",        "Wall_Jump_Prompt" }
         };
 
         // 关键字已预转小写，避免 BuildIconCache 中反复 ToLower
@@ -68,7 +68,7 @@ namespace SkillTriggerMod
             { "hasDoubleJump",      new[] { "faydown cloak", "faydowncloak", "double jump", "doublejump", "faydown", "double", "jump" } },
             { "hasChargeSlash",     new[] { "needle strike", "needlestrike", "charge slash", "chargeslash", "needle strike", "charge", "slash" } },
             { "hasSuperJump",       new[] { "silk soar", "silksoar", "super jump", "superjump", "silk soar", "super", "jump" } },
-            { "hasWallJump",        new[] { "cling grip", "clinggrip", "wall jump", "walljump", "cling", "grip", "wall", "jump" } }
+            { "hasWalljump",        new[] { "cling grip", "clinggrip", "wall jump", "walljump", "cling", "grip", "wall", "jump" } }
         };
 
         public static void SetSeed(int seed)
@@ -242,7 +242,7 @@ namespace SkillTriggerMod
         {
             try
             {
-                string fieldName = "hasWallJump";
+                string fieldName = "hasWalljump";
                 var pd = PlayerData.instance;
                 var fi = typeof(PlayerData).GetField(fieldName, BindingFlags.Instance | BindingFlags.Public);
                 if (fi == null || (bool)fi.GetValue(pd)) return;
