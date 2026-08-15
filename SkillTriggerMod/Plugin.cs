@@ -62,8 +62,13 @@ namespace SkillTriggerMod
 
         private IEnumerator WaitForGameReady()
         {
-            while (GameManager.instance == null) yield return null;
-            while (string.IsNullOrEmpty(GameManager.instance.sceneName)) yield return null;
+            // 用 FindObjectOfType 轮询，避免访问 GameManager.instance getter
+            //（getter 在 GameManager 未就绪时每次调用都会打 "Couldn't find a Game Manager" 错误）
+            GameManager gm;
+            while ((gm = UnityEngine.Object.FindObjectOfType<GameManager>()) == null)
+                yield return new WaitForSeconds(0.25f);
+            while (string.IsNullOrEmpty(gm.sceneName))
+                yield return new WaitForSeconds(0.25f);
             yield return null;
             SkillTriggerAPI.MarkGameReady();
         }
